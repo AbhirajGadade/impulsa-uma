@@ -1,0 +1,28 @@
+/* UMA identity; geometry, typography and page layouts follow the reference. */
+.header-logo-img{height:38px;max-width:106px;border-radius:0}
+.header-logo-svg{height:26px;max-width:154px}
+.footer-logo-img{background:white;border-radius:5px;padding:5px;height:42px;max-width:126px}
+.footer-logo-svg{height:28px;max-width:165px}
+.btn-primary{color:#fff}
+.btn-primary:hover{box-shadow:0 4px 16px #951d4b35}
+.hero .btn-primary{color:white;box-shadow:0 5px 18px #951d4b35}
+.uma-skip{position:absolute;top:-100px;left:16px;z-index:9999;background:#fff;color:#76183d;padding:12px 18px;border-radius:8px}
+.uma-skip:focus{top:8px}
+:focus-visible{outline:3px solid #b64875;outline-offset:3px}
+.uma-dialog-close{position:absolute;right:18px;top:12px;background:none;border:0;font-size:28px;line-height:1;color:#64748b}
+.dl-modal-overlay{position:fixed;inset:0;background:#0f172a80;backdrop-filter:blur(5px);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px}
+.dl-modal{position:relative;max-width:460px;width:100%;background:#fff;border-radius:20px;padding:36px 30px;box-shadow:0 25px 50px -12px #0f172a40}
+.dl-modal h2{font-size:24px;margin-bottom:12px}
+.dl-modal p{font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px}
+.dl-modal .uma-download-note{margin:18px 0 24px}
+.dl-modal>.btn{width:100%}
+.faculty-farmacia{background:#ecfdf5;color:#047857}
+.tpl-card-preview.faculty-farmacia{background:linear-gradient(135deg,#ecfdf5,#d1fae5)}
+.faculty-tag.faculty-farmacia{color:#047857;background:#ecfdf5}
+.uma-builder-link{display:block;text-align:center;font-size:13px;margin-top:10px;font-weight:600}
+.uma-draft-note{font-size:12px;line-height:1.6;color:#64748b;margin:14px 0 0;text-align:center}
+.analysis-disclaimer{font-size:13px;color:#64748b;max-width:660px;margin-top:12px;line-height:1.7}
+.footer-contact-item{overflow-wrap:anywhere;word-break:normal}
+@media(min-width:768px){.header-logo-img{height:40px;max-width:114px}.header-logo-svg{height:27px;max-width:165px}}
+@media(max-width:380px){.header-logo-img{height:32px;max-width:90px}.header-logo-svg{height:23px;max-width:132px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

@@ -1,0 +1,13 @@
+{
+  "name": "empleakit-uma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EmpleaKit UMA portal — editable browser modules and portable local development tools",
+  "type": "module",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "node scripts/serve.mjs --watch",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs"
+  }
+}
