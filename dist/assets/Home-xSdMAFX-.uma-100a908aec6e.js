@@ -1,4 +1,4 @@
-import{j as e}from"./motion-CbgZZ6e6.uma-dd107980623b.js";import{L as i}from"./vendor-DwWQ8ttR.uma-dd107980623b.js";import{I as s}from"./index-DSiOxGBJ.uma-dd107980623b.js";import{A as a}from"./AnimatedSection-a29Q7Nj3.uma-dd107980623b.js";
+import{j as e}from"./motion-CbgZZ6e6.uma-100a908aec6e.js";import{L as i}from"./vendor-DwWQ8ttR.uma-100a908aec6e.js";import{I as s}from"./index-DSiOxGBJ.uma-100a908aec6e.js";import{A as a}from"./AnimatedSection-a29Q7Nj3.uma-100a908aec6e.js";
 const o=[
 {id:"rrhh-wurth",title:"Practicante de RRHH - Wurth",preview:"¡La UMA y WÜRTH Perú SAC te invitan a formar parte de una gran experiencia profesional!",url:"https://uma.edu.pe/practicante-de-rrhh-wurth/"},
 {id:"farmacia-logistics",title:"Farmacia, Logistics Medical",preview:"💊 Oportunidad de prácticas – Farmacia y Bioquímica · Logistics Medical S.A.C. · Bolsa Laboral UMA",url:"https://uma.edu.pe/farmacia-logistics-medical/"},

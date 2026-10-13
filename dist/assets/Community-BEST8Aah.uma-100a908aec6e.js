@@ -1,6 +1,6 @@
-import{j as e}from"./motion-CbgZZ6e6.uma-dd107980623b.js";
-import{I as a,S as c}from"./index-DSiOxGBJ.uma-dd107980623b.js";
-import{A as i}from"./AnimatedSection-a29Q7Nj3.uma-dd107980623b.js";
+import{j as e}from"./motion-CbgZZ6e6.uma-100a908aec6e.js";
+import{I as a,S as c}from"./index-DSiOxGBJ.uma-100a908aec6e.js";
+import{A as i}from"./AnimatedSection-a29Q7Nj3.uma-100a908aec6e.js";
 
 const o="https://uma.edu.pe/seguimiento-al-egresado/",t="https://uma.edu.pe/",m="https://uma.edu.pe/seguimiento-al-egresado/";
 const d=[{id:"pregrado",title:"Pregrado",url:t,desc:"Eventos, noticias y ofertas para estudiantes de pregrado."},{id:"posgrado",title:"Egresados",url:m,desc:"Empleabilidad y seguimiento al egresado: recursos y contacto con la oficina."}];

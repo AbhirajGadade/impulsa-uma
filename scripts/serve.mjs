@@ -82,7 +82,7 @@ server.on('error', error => {
 server.listen(Number(port), host, () => {
   const address = server.address();
   const displayHost = host.includes(':') ? `[${host}]` : host;
-  console.log(`EmpleaKit UMA: http://${displayHost}:${address.port}`);
+  console.log(`Impulsa UMA: http://${displayHost}:${address.port}`);
   console.log(watching ? 'Watching src/ and public/. Save your changes, then refresh your browser.' : 'Press Ctrl+C to stop.');
 });
 

@@ -55,6 +55,9 @@ The generated `dist/` is also included for convenience and can be hosted by a st
 | `src/portal/index-DSiOxGBJ.js` | App shell, header, footer, client-side router and shared icons |
 | `src/portal/Home-xSdMAFX-.js` | Homepage (`/`), without the template gallery |
 | `src/portal/Templates-C8-QpFT_.js` | Template page and filters (`/plantillas`) |
+| `src/portal/template-examples.js` | Fictional CV examples, faculty palettes and layout selections shared by gallery previews and downloads |
+| `src/portal/template-documents.js` | Editable Word generation; preview and download use the same generated DOCX bytes |
+| `src/portal/WordTemplatePreview.js` | Actual Word document previews, rendered with the locally bundled preview library |
 | `src/portal/Builder-BKFKNDk_.js` | Seven-stage CV builder, form components, preview and Word generation (`/crear`) |
 | `src/portal/Analysis-DvvokPqy.js` | Local CV review page (`/analizar`) |
 | `src/portal/Community-BEST8Aah.js` | Community page (`/comunidad`) |
@@ -72,6 +75,7 @@ The generated `dist/` is also included for convenience and can be hosted by a st
 | `public/vendor/` | PDF/ZIP/Word libraries, PDF worker, character maps, fonts and license files |
 | `scripts/build.mjs` | Portable Node.js build, deterministic cache filenames and route generation |
 | `scripts/serve.mjs` | Local HTTP server, optional environment loading and file watcher |
+| `scripts/check-template-gallery.mjs` | Isolated Chrome/Edge validation of all 16 previews and Word downloads |
 | `scripts/build-portal.py` | Original build helper, retained as part of the project; prefer the npm workflow |
 | `src/portal-build.json` | Generated release manifest; do not edit manually |
 | `dist/` | Complete generated static application |
@@ -81,6 +85,8 @@ The generated `dist/` is also included for convenience and can be hosted by a st
 Some modules retain compressed formatting and short variable names from their compiled origin. VS Code's **Format Document** command can format a module before editing. Preserve its imports, exports and license comments. The build rewrites filenames and packages these modules; it is not a JSX/TypeScript compiler.
 
 To change page content, edit the corresponding module in `src/portal/`. To replace images or downloadable files, edit `public/`. To add a route, update both the app router in `index-DSiOxGBJ.js` and `src/routes.json`.
+
+The Plantillas gallery generates its Word downloads from the shared examples and layout definitions. Each card and expanded preview renders the same DOCX bytes that the download button saves. Update `template-examples.js` for example content and `template-documents.js` for document formatting. The static files in `public/templates/` are retained for other existing links.
 
 ## Environment variables
 
