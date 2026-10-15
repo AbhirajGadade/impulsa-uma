@@ -12,7 +12,7 @@ const escapeXml = value => String(value ?? "").replace(/[&<>"']/g, character => 
 
 function paragraph(text, options = {}) {
   const { size = 20, color = "273345", bold = false, align = "left", before = 0,
-    after = 90, heading = false, bullet = false, line = 280 } = options;
+    after = 80, heading = false, bullet = false, line = 260 } = options;
   const properties = [
     heading ? '<w:pStyle w:val="Heading1"/><w:keepNext/>' : options.keepNext ? "<w:keepNext/>" : "",
     '<w:keepLines/>', `<w:jc w:val="${align}"/>`,
@@ -26,25 +26,25 @@ function paragraph(text, options = {}) {
 function section(title, content, model, { sidebar = false, first = false } = {}) {
   return paragraph(title, {
     heading: true, bold: true, size: sidebar ? 20 : 22, color: model.ink,
-    before: first ? 0 : 230, after: 125, rule: model.accent,
+    before: first ? 0 : 180, after: 100, rule: model.accent,
   }) + content;
 }
 
 function mainSections(model) {
   return model.sections.map((group, index) => section(group.title,
     group.entries.map(entry =>
-      paragraph(entry.title, { bold: true, size: 20, before: 70, after: 45, keepNext: true })
-      + paragraph(entry.meta, { size: 17, color: "64748b", after: 75, keepNext: true })
-      + entry.lines.map(line => paragraph(line, { bullet: true, after: 65 })).join(""),
+      paragraph(entry.title, { bold: true, size: 20, before: 60, after: 40, keepNext: true })
+      + paragraph(entry.meta, { size: 17, color: "64748b", after: 60, keepNext: true })
+      + entry.lines.map(line => paragraph(line, { bullet: true, after: 55 })).join(""),
     ).join(""), model, { first: index === 0 }),
   ).join("");
 }
 
 function sidebarSections(model, sidebar = true) {
   const size = sidebar ? 18 : 20;
-  return section(model.labels.profile, paragraph(model.profile, { size, after: 90 }), model, { sidebar, first: sidebar })
-    + section(model.labels.skills, model.skills.map(skill => paragraph(skill, { size, after: 80 })).join(""), model, { sidebar })
-    + section(model.labels.languages, model.languages.map(language => paragraph(language, { size, after: 80 })).join(""), model, { sidebar });
+  return section(model.labels.profile, paragraph(model.profile, { size, after: 75 }), model, { sidebar, first: sidebar })
+    + section(model.labels.skills, model.skills.map(skill => paragraph(skill, { size, after: 65 })).join(""), model, { sidebar })
+    + section(model.labels.languages, model.languages.map(language => paragraph(language, { size, after: 65 })).join(""), model, { sidebar });
 }
 
 const noBorders = '<w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/>';
@@ -87,7 +87,8 @@ function documentBody(model) {
   const header = paragraph(model.name.toUpperCase(), { bold: true, size: 44, color, align, after: 100 })
     + paragraph(model.role, { bold: true, size: 20, color: darkHeader ? "ffffff" : model.accent, align, after: 120 })
     + paragraph(model.contact.join("  |  "), { size: 16, color: darkHeader ? "e2e8f0" : "64748b", align, after: 0 });
-  const innerHeaderWidth = pageWidth - 800;
+  const headerPadding = 320;
+  const innerHeaderWidth = pageWidth - headerPadding * 2;
   const withPhoto = model.layout === "photo"
     ? table(['<w:tr>' + cell(photoXml(), 1800, { fill: headerFill, padding: 0 }) + cell(header, innerHeaderWidth - 1800, { fill: headerFill, padding: 0 }) + '</w:tr>'], [1800, innerHeaderWidth - 1800]) + paragraph("", { size: 2, line: 20, after: 0 })
     : header;
@@ -102,13 +103,13 @@ function documentBody(model) {
   const topEdge = ["executive", "classic"].includes(model.layout)
     ? { top: { color: model.accent, size: model.layout === "executive" ? 80 : 32 } } : {};
   const rows = [
-    '<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="1900" w:hRule="atLeast"/></w:trPr>'
-      + cell(withPhoto, pageWidth, { fill: headerFill, span: columns.length, padding: 400, bottomRule: headerRule, edges: { ...leftEdge, ...rightEdge, ...topEdge } }) + '</w:tr>',
-    '<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="12000" w:hRule="atLeast"/></w:trPr>'
+    '<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="1600" w:hRule="atLeast"/></w:trPr>'
+      + cell(withPhoto, pageWidth, { fill: headerFill, span: columns.length, padding: headerPadding, bottomRule: headerRule, edges: { ...leftEdge, ...rightEdge, ...topEdge } }) + '</w:tr>',
+    '<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="9600" w:hRule="atLeast"/></w:trPr>'
       + (singleColumn
-        ? cell(mainSections(model) + sidebarSections(model, false), pageWidth, { padding: 440 })
-        : cell(sidebarSections(model), sidebarWidth, { fill: model.tint, padding: 270, edges: leftEdge })
-          + cell(mainSections(model), pageWidth - sidebarWidth, { padding: 340, edges: rightEdge }))
+        ? cell(mainSections(model) + sidebarSections(model, false), pageWidth, { padding: 360 })
+        : cell(sidebarSections(model), sidebarWidth, { fill: model.tint, padding: 240, edges: leftEdge })
+          + cell(mainSections(model), pageWidth - sidebarWidth, { padding: 280, edges: rightEdge }))
       + '</w:tr>',
   ];
   return table(rows, columns) + paragraph(model.labels.note, { size: 14, color: "64748b", before: 180, after: 0 });

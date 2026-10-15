@@ -75,6 +75,13 @@ try {
   await send("Browser.setDownloadBehavior", { behavior: "allow", downloadPath });
   await send("Page.navigate", { url });
   await until(() => evaluate(() => document.querySelectorAll(".tpl-card").length === 16), "Gallery did not render 16 cards.");
+  const desktopPreview = await evaluate(() => {
+    const preview = document.querySelector(".tpl-card-preview").getBoundingClientRect();
+    const paper = document.querySelector(".tpl-card-paper").getBoundingClientRect();
+    return { height: preview.height, paperHeight: paper.height, paperTop: paper.top, top: preview.top };
+  });
+  assert.ok(desktopPreview.height <= 225, "Desktop template previews should stay compact.");
+  assert.ok(desktopPreview.paperTop >= desktopPreview.top, "The compact preview must show the document header.");
   const zipModule = { exports: {} };
   const zipContext = { module: zipModule, exports: zipModule.exports, Buffer, Uint8Array, ArrayBuffer, setTimeout, clearTimeout, setImmediate };
   vm.runInNewContext(readFileSync(path.join(root, "public/vendor/jszip.min.js"), "utf8"), zipContext);
@@ -149,10 +156,22 @@ try {
     console.log(`Verified template ${template.id}: ${example.name} / ${example.layout}`);
     await until(() => evaluate(() => !document.querySelector(".dl-modal")), "Download dialog did not close.");
   }
-  await evaluate(() => { window.scrollTo(0, 0); });
+  await evaluate(() => document.querySelector(".tpl-gallery").scrollIntoView());
   await pause(150);
   const galleryShot = await send("Page.captureScreenshot", { format: "png" });
   writeFileSync(path.join(qa, "gallery.png"), Buffer.from(galleryShot.data, "base64"));
+  await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 900, deviceScaleFactor: 1, mobile: true });
+  await evaluate(() => document.querySelector(".tpl-gallery").scrollIntoView());
+  await pause(200);
+  const mobilePreview = await evaluate(() => {
+    const preview = document.querySelector(".tpl-card-preview").getBoundingClientRect();
+    const paper = document.querySelector(".tpl-card-paper").getBoundingClientRect();
+    return { height: preview.height, paperTop: paper.top, top: preview.top, paperBottom: paper.bottom, bottom: preview.bottom };
+  });
+  assert.ok(mobilePreview.height <= 275, "Mobile template previews should stay compact.");
+  assert.ok(mobilePreview.paperTop >= mobilePreview.top && mobilePreview.paperBottom <= mobilePreview.bottom, "Mobile previews must display the whole page.");
+  const mobileShot = await send("Page.captureScreenshot", { format: "png" });
+  writeFileSync(path.join(qa, "gallery-mobile.png"), Buffer.from(mobileShot.data, "base64"));
   writeFileSync(path.join(qa, "results.json"), JSON.stringify({ release, results }, null, 2));
   console.log(`PASS: all ${results.length} DOCX downloads match their rendered previews. Visual QA: ${qa}`);
 } finally {
